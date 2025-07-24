@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
+    <style>
+        /* Add your custom styles here */
+
+        #chatContainer {
+            border: 2px solid #ec407a;
+            border-radius: 15px;
+            padding: 10px;
+            text-align: left;
+            margin-top: 100px;
+            overflow-y: auto;
+            max-height: 250px;
+            display: flex;
+            flex-direction: column-reverse;
+            /* Display messages in reverse order */
+            animation: popUp 0.5s ease-in-out;
+            /* Add pop-up animation */
+        }
+
+        .userBubble,
+        .aiBubble {
+            padding: 10px;
+            margin: 5px;
+            border-radius: 10px;
+            word-wrap: break-word;
+            max-width: 70%;
+            animation: fadeIn 0.5s ease-in-out;
+            /* Add fade-in animation */
+        }
+
+        .userBubble {
+            background-color: #ec407a;
+            color: white;
+            text-align: right;
+            align-self: flex-end;
+            /* Align user messages to the right */
+        }
+
+        .aiBubble {
+            background-color: #ec40798d;
+            color: white;
+            text-align: left;
+            align-self: flex-start;
+            /* Align AI messages to the left */
+        }
+
+        #content {
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        input {
+            padding: 10px;
+            border: 1px solid #ec407a;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            width: 70%;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #ec407a;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 70%;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #d81b60;
+        }
+
+      /* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #ff80ab; /* Pink background color */
+    margin: auto;
+    padding: 20px;
+    border: 2px solid #ffffff; /* White border */
+    border-radius: 8px; /* Adjust border-radius for a rounded appearance */
+    width: 30%; /* Adjust width as needed */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle box-shadow for elevation */
+    animation: fadeIn 0.5s ease-in-out;
+    position: absolute; /* Ensure absolute positioning for centering */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.close {
+    color: #ffffff; /* White close button color */
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    font-family: 'Comic Sans MS', cursive; /* Comic Sans font */
+    transition: color 0.3s ease; /* Add smooth color transition */
+}
+
+.close:hover,
+.close:focus {
+    color: #d81b60; /* Darker pink on hover */
+    text-decoration: none;
+}
+
+/* Heart background */
+.modal-content::before {
+    content: '\2665'; /* Unicode for heart symbol */
+    font-size: 30px;
+    color: #ffffff; /* White heart color */
+    opacity: 0.2; /* Adjust opacity for a subtle effect */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1; /* Move behind the modal content */
+}
+
+   
+        /* Flower animation */
+        .flower {
+            animation: bloom 5s infinite ease-in-out;
+        }
+
+        @keyframes bloom {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Custom animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes popUp {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+       
+    </style>
+    <title>Your AI World - Chat</title>
+</head>
+
+<body>
+    <header>
+        <div class="border-header">
+            <h1><span class="flower">&#127802;</span>Your AI World<span class="flower">&#127802;</span></h1>
+        </div>
+    </header>
+
+    <div id="background-elements">
+        <!-- Background elements will be added here dynamically -->
+    </div>
+
+    <div id="content">
+        <div class="chat-container" id="chatContainer">
+            <div class="chat" id="chat">
+                <!-- Chat messages will be added here dynamically -->
+            </div>
+        </div>
+        <form id="chatForm" onsubmit="sendMessage(); return false;">
+            <div style="display: flex; align-items: center;">
+                <input type="text" id="userInput" placeholder="🌟 Type your message..." autocomplete="off">
+                <span onclick="redirectToRealtimePage()" style="cursor: pointer; margin-left: 10px;">
+                    📷 <!-- Camera icon -->
+                </span>
+            </div>
+            <button type="submit">Send</button>
+        </form>
+        
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Your AI World. All rights reserved.</p>
+    </footer>
+
+    <!-- Modal for cute pop-up messages -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <p id="modal-content"></p>
+        </div>
+    </div>
+
+    <!-- Script for the chat functionality -->
+    <script>
+        var cameraStarted = false;  // Variable to track if the camera has started
+        function redirectToRealtimePage() {
+            if (!cameraStarted) {
+            // Redirect only if the camera has not started
+            window.location.href = '/realtime_emotion_detection';
+            cameraStarted = true;  // Set the variable to true to indicate camera start
+        }
+        }
+        
+       function handleUserResponse(response) {
+    // Handle the user's response to the final pop-up
+    fetch('/handle_user_response', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json', // Change content type to JSON
+        },
+        body: JSON.stringify({
+            'user_response': response,
+        }),
+    })
+        .then(response => response.json())
+        .then(data => {
+            // Display AI responses or additional pop-ups based on user's response
+            if (data.show_options) {
+                showPopups(data.messages);
+            } else {
+                addToChat('ai', data.ai_response);
+                scrollToBottom();
+                // Check if the user responded with 'yes'
+                if (response.toLowerCase() === 'yes') {
+                    closeModal(); // Close the modal if the user is feeling better
+                }
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            console.error('Response:', error.response);
+        });
+}
+
+
+        function showPopups(messages) {
+            function showNextPopup(index) {
+                if (index < messages.length) {
+                    showModal(messages[index].content, function () {
+                        // Callback function to be executed after the popup is closed
+                        setTimeout(function () {
+                            showNextPopup(index + 1);
+                        }, 500); // Adjust the delay (in milliseconds) between popups
+                    });
+                } else {
+                    // After showing all pop-ups, ask if the user is feeling better
+                    setTimeout(function () {
+                        showModal("Are you feeling better?");
+                    }, 500); // Adjust the delay (in milliseconds) for the final popup
+                }
+            }
+
+            // Start showing popups
+            showNextPopup(0);
+        }
+
+        function closeModal() {
+            // Your existing closeModal function remains unchanged
+            var modal = document.getElementById("myModal");
+            if (modal) {
+                modal.style.display = "none";
+            } else {
+                console.error("Modal element not found");
+            }
+        }
+
+        function showModal(message, onCloseCallback) {
+    // Get the modal element
+    var modal = document.getElementById("myModal");
+
+    // Check if the modal element exists
+    if (modal) {
+        // Display the modal
+        modal.style.display = "block";
+
+        // Display the message in the modal content
+        var modalContent = document.getElementById("modal-content");
+        modalContent.innerHTML = message;
+
+        // If this is the final pop-up, add buttons for user response
+        if (message === "Are you feeling better?") {
+            var buttonsContainer = document.createElement('div');
+            buttonsContainer.innerHTML = '<br><button onclick="handleUserResponse(\'yes\')">Yes</button> <button onclick="handleUserResponse(\'no\')">No</button>';
+            modalContent.appendChild(buttonsContainer);
+        }
+
+        // Set up the close callback if provided
+        if (onCloseCallback) {
+            // Attach the callback to the modal close button
+            var closeButton = document.querySelector(".close");
+            closeButton.onclick = function () {
+                // Execute the callback when the modal is closed
+                onCloseCallback();
+            };
+        }
+    } else {
+        console.error("Modal element not found");
+    }
+}
+
+
+        function sendMessage() {
+            // Get user input
+            var userInput = document.getElementById('userInput').value;
+
+            // Add user message to the chat
+            addToChat('user', userInput);
+
+            // Send the user input to your server for processing
+            fetch('/process_chat', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json', // Change content type to JSON
+                },
+                body: JSON.stringify({
+                    'user_input': userInput,
+                }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Check if user input indicates sadness or anger
+                    if (data.show_options) {
+                        // Directly show the pop-up message
+                        showPopups(data.messages);
+                    } else {
+                        // Add AI response to the chat
+                        addToChat('ai', data.ai_response);
+                        scrollToBottom();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    console.error('Response:', error.response);
+                });
+
+            // Clear the input field
+            document.getElementById('userInput').value = '';
+        }
+
+        function addToChat(sender, message) {
+            var chat = document.getElementById('chat');
+            if (chat) {
+                var newMessage = document.createElement('div');
+                newMessage.className = sender + 'Bubble'; // Apply userBubble or aiBubble class
+                newMessage.innerText = message;
+                chat.appendChild(newMessage);
+            } else {
+                console.error("Chat element not found");
+            }
+        }
+
+        function scrollToBottom() {
+            // Scroll to the bottom to show the latest messages
+            var chatContainer = document.getElementById('chatContainer');
+            if (chatContainer) {
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            } else {
+                console.error("Chat container element not found");
+            }
+        }
+    </script>
+
+</body>
+
+</html>

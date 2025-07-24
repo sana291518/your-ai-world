@@ -1,0 +1,42 @@
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.so
+
+# Jupyter Notebook Checkpoints
+.ipynb_checkpoints/
+
+# Virtual Environment
+.venv/
+venv/
+ENV/
+env/
+*.env
+
+# VSCode settings
+.vscode/
+
+# Model files and large data
+*.h5
+*.json
+*.pkl
+*.pt
+
+# Dataset and generated data
+data/
+*.jpeg
+*.jpg
+*.png
+
+# Token or credential files
+*.token
+*.key
+*.pem
+
+# Logs and outputs
+*.log
+*.out
+
+# OS files
+.DS_Store
+Thumbs.db

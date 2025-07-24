@@ -1,0 +1,349 @@
+/* Add your custom styles here */
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-color: #aeefff;
+    color: #333;
+    margin: 0;
+    display: flex;
+    flex-direction: column; /* Make sure the body is a column layout */
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh; /* Use min-height to allow for content expansion */
+    overflow: hidden;
+    background-image: url('/static/css/bg1.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+body > div {
+    margin: auto;
+    width: 55%;
+    overflow: auto;
+}
+
+header {
+    background-color: #ec407a; /* Pink color for the header */
+    color: #fff; /* White text for the header */
+    padding: 10px 0; /* Reduced padding */
+    text-align: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+    border-bottom: 2px solid #fff; /* Border color for the header */
+}
+
+header h1 {
+    margin: 0;
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* Use Comic Sans for the heading */
+    font-size: 2em; /* Reduced font size */
+    color: white; /* Changing color to white */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Additional styles for flower in header */
+header h1 .flower {
+    font-size: 1.5em;
+    margin: 0 10px;
+    color: #fff; /* Set flower color to white */
+}
+
+/* Add a margin to the content to prevent overlap with fixed header and footer */
+#content {
+    margin-top: 100px; /* Adjust the margin as needed */
+    padding: 20px;
+    border: 2px solid #ec407a; /* Border color */
+    border-radius: 15px;
+    text-align: center; /* Center text in the content div */
+}
+
+/* Update footer styles for a more creative look */
+footer {
+    background-color: #ec407a;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0; /* Add left property to ensure it starts from the left edge */
+    width: 100%;
+    z-index: 3;
+}
+
+/* Add styles for the copyright text */
+footer p {
+    margin: 0;
+    color: white; /* Changing color to white */
+}
+
+/* Add styles for the AI line */
+h1 {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 2em; /* Adjusted font size */
+    animation: fadeInUp 1s ease-in-out;
+    text-align: center; /* Center the text */
+}
+
+h1 span {
+    display: block; /* Display the spans as block elements */
+}
+
+/* Add styles for the orange AI line */
+h1 span.ai {
+    color: #ffa500; /* Orange color for AI */
+    font-size: 1.5em;
+}
+
+/* Add margin to separate AI line and Get Started button */
+#content {
+    text-align: center; /* Center text in the content div */
+    margin-top: 20px; /* Adjust the margin as needed */
+}
+
+/* Add styles for the Get Started button */
+button {
+    background-color: #64b5f6;
+    padding: 15px 30px; /* Increase padding for better visibility and click area */
+    font-size: 1.5em;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 30px;
+    position: relative;
+}
+
+button::before {
+    content: '\2601'; /* Cloud icon */
+    font-size: 1.5em;
+    color: #fff;
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+button.square:hover {
+    background-color: #42a5f5;
+    transform: scale(1.05);
+}
+
+/* Add styles for the close button and cloud icon in the corner */
+.popup .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5em;
+    color: #333;
+    cursor: pointer;
+}
+
+/* Additional styles for flower in header */
+header h1 .flower {
+    font-size: 1.5em;
+    margin: 0 10px;
+    color: #fff; /* Set flower color to white */
+}
+
+/* Add styles for the popup */
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffcc80;
+    color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+}
+
+.popup .cloud-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.popup .square {
+    width: 100px; /* Adjust the width as needed */
+}
+
+.popup .square::before {
+    content: '\2601'; /* Cloud icon */
+    font-size: 1.5em;
+    color: #fff;
+    position: absolute;
+    top: 10px; /* Adjust the top position as needed */
+    right: 10px; /* Adjust the right position as needed */
+    transform: translate(0, 0); /* Reset translation */
+}
+
+/* Styles for the welcome message */
+#content h1 {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 2em; /* Adjusted font size */
+    animation: fadeInUp 1s ease-in-out;
+    text-align: center; /* Center the text */
+}
+
+#content h1 span {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+#content h1 span:hover {
+    transform: scale(1.2);
+}
+
+#content h1 span:nth-child(1) {
+    color: #ff6347; /* Red */
+}
+
+#content h1 span:nth-child(2) {
+    color: #ffa500; /* Orange */
+}
+
+#content h1 span:nth-child(3) {
+    color: #ffd700; /* Yellow */
+}
+
+#content h1 span:nth-child(4) {
+    color: #32cd32; /* Green */
+}
+
+#content h1 span:nth-child(5) {
+    color: #6495ed; /* Blue */
+}
+
+#content h1 span:nth-child(6) {
+    color: #9400d3; /* Purple */
+}
+
+#content p {
+    color: #ec407a;
+    animation: fadeInUp 1s ease-in-out;
+    margin-top: 10px; /* Add margin to separate from the welcome message */
+}
+
+  /* Add your custom styles here */
+#chatContainer {
+    border: 2px solid #ec407a;
+    border-radius: 15px;
+    padding: 10px;
+    text-align: left;
+    margin-top: 100px;
+    overflow-y: auto;
+    max-height: 400px;
+    display: fixed;
+    flex-direction: column-reverse; /* Display messages in reverse order */
+}
+
+.userBubble, .aiBubble {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    word-wrap: break-word;
+    max-width: 70%;
+}
+
+.userBubble {
+    background-color: #ec407a;
+    color: white;
+    text-align: right;
+    align-self: flex-end; /* Align user messages to the right */
+}
+
+.aiBubble {
+    background-color: #ec40798d;
+    color: white;
+    text-align: left;
+    align-self: flex-start; /* Align AI messages to the left */
+}
+
+#chatForm {
+    margin-top: 20px; /* Adjust margin as needed */
+    display: fixed;
+    align-items: center;
+}
+
+#userInput {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    font-size: 1.2em;
+}
+
+#userInput::placeholder {
+    color: #64b5f6; /* Placeholder color */
+}
+
+#userInput:focus {
+    outline: none; /* Remove focus outline */
+}
+
+
+button.send-button {
+    background-color: #fff260;
+    padding: 15px 20px;
+    font-size: 1.2em;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+button.send-button:hover {
+    background-color: #42a5f5;
+}
+h2 > a {
+    text-decoration: none;
+    border: 1px solid red;
+    padding: 2px;
+    border-radius: 10px;
+}
+
+h2 > a:hover {
+    border: 1px ridge red;
+    background-color: white;
+}
+
+#emotionDetection {
+    width: 640px;
+    padding: 5px;
+    border: 2px solid #ec407a;
+    border-radius: 10px;
+    float: left;
+    text-align: center;
+    margin: 0px auto;
+    margin-top: 100px;
+}
+#canvasParent {
+    display: grid;
+    grid-template: 1fr / 1fr;
+}
+
+#canvasParent > * {
+    grid-column: 1 / 1;
+    grid-row: 1 / 1;
+}
+
+#captureCanvas {
+    z-index: 1; 
+}
+
+#emotionVideo {
+    background-color: #666;
+    width: 640px;
+    height: 480px;
+    z-index: 2;
+}
+
+#drawCanvas {
+    z-index: 3;
+}
